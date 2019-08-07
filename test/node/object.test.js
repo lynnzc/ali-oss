@@ -1638,4 +1638,22 @@ describe('test/object.test.js', () => {
       }
     });
   });
+
+  describe('symlink()', () => {
+    const name = '/oss/symlink.js';
+
+    before(async () => {
+      await store.put(name, __filename);
+    });
+
+    it('Should put Symlink', async () => {
+      result = await store.putSymlink(name, __filename);
+      assert.equal(result.res.status, 200);
+    });
+
+    it('Should get Symlink', async () => {
+      result = await store.getSymlink(name);
+      assert.equal(result.res.status, 200);
+    });
+  });
 });
